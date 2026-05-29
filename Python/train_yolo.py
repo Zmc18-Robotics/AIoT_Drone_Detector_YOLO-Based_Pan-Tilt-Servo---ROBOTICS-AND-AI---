@@ -89,7 +89,7 @@ def scan_classes(datasheet_dir):
 
     return class_names, valid_images, classes_dict
 
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 def build_dataset(class_names, valid_images, out_dir):
     """Buat struktur dataset YOLOv8 Object Detection."""
     if os.path.exists(out_dir):
