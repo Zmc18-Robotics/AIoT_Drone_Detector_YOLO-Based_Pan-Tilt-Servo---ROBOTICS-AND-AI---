@@ -1,36 +1,36 @@
 # 🛡️ Anti Drone Turret Systems
 
-Sistem deteksi drone real-time menggunakan **ESP32-CAM + YOLOv8**.  
-Kamera stream langsung ke Python, lalu YOLO mengklasifikasikan apakah drone **aman** atau **berbahaya**.
+Real-time drone detection system using **ESP32-CAM + YOLOv8**.  
+The camera streams live to Python, where YOLO classifies whether a drone is **safe** or **dangerous**.
 
 ---
 
-## 📁 Struktur Folder
+## 📁 Folder Structure
 
 ```
 Anti Drone Turret Systems/
 │
 ├── Esp32-CAM/
-│   └── Esp32_CAM.ino          <- Kode Arduino untuk ESP32-CAM + senter
+│   └── Esp32_CAM.ino          <- Arduino code for ESP32-CAM + flashlight
 │
 ├── Python/
-│   ├── main_yolo.py           <- Program utama: streaming + deteksi + screenshot
-│   ├── train_yolo.py          <- Training model YOLOv8 dari dataset
-│   ├── label_manual.py        <- Tool labeling bounding box (GUI)
-│   ├── screenshots/           <- Hasil screenshot manual/auto (S / A)
-│   ├── yolo_dataset/          <- Dataset sementara saat training (auto-dibuat)
-│   └── drone_model/           <- Model hasil training (auto-dibuat)
+│   ├── main_yolo.py           <- Main program: streaming + detection + screenshot
+│   ├── train_yolo.py          <- YOLOv8 model training from dataset
+│   ├── label_manual.py        <- Bounding box labeling tool (GUI)
+│   ├── screenshots/           <- Manual/auto screenshot results (S / A)
+│   ├── yolo_dataset/          <- Temporary dataset during training (auto-created)
+│   └── drone_model/           <- Trained model output (auto-created)
 │       └── weights/
-│           └── best.pt        <- Model siap pakai
+│           └── best.pt        <- Ready-to-use model
 │
-└── Datasheet/                 <- Folder foto dataset
-    ├── Drone aman/
-    │   ├── Drone1/            <- Foto-foto drone aman tipe 1
-    │   ├── Drone2/            <- Foto-foto drone aman tipe 2
+└── Datasheet/                 <- Dataset photo folder
+    ├── Safe Drone/
+    │   ├── Drone1/            <- Safe drone type 1 photos
+    │   ├── Drone2/            <- Safe drone type 2 photos
     │   └── ...
-    └── Drone berbahaya/
-        ├── Drone1/            <- Foto-foto drone berbahaya tipe 1
-        ├── Drone2/            <- Foto-foto drone berbahaya tipe 2
+    └── Dangerous Drone/
+        ├── Drone1/            <- Dangerous drone type 1 photos
+        ├── Drone2/            <- Dangerous drone type 2 photos
         └── ...
 ```
 
@@ -38,40 +38,40 @@ Anti Drone Turret Systems/
 
 ## ⚙️ Hardware
 
-| Komponen | Detail |
+| Component | Details |
 |---|---|
-| Mikrokontroler | ESP32-CAM (AI-THINKER) |
-| Kamera | OV2640 (sudah built-in di ESP32-CAM) |
-| Senter / Flash | GPIO 4 (built-in flash LED) |
-| Power | 5V via USB / adaptor |
-| Koneksi | WiFi 2.4 GHz |
+| Microcontroller | ESP32-CAM (AI-THINKER) |
+| Camera | OV2640 (built-in on ESP32-CAM) |
+| Flashlight / Flash | GPIO 4 (built-in flash LED) |
+| Power | 5V via USB / adapter |
+| Connection | WiFi 2.4 GHz |
 
-### Pin ESP32-CAM (AI-THINKER)
-Sudah terkonfigurasi di dalam `Esp32_CAM.ino` — tidak perlu diubah selama menggunakan board AI-THINKER.
+### ESP32-CAM Pin Configuration (AI-THINKER)
+Already configured in `Esp32_CAM.ino` — no changes needed as long as you're using the AI-THINKER board.
 
 ---
 
-## 🚀 Cara Memulai
+## 🚀 Getting Started
 
-### 1. Upload Firmware ke ESP32-CAM
+### 1. Upload Firmware to ESP32-CAM
 
-1. Buka **Arduino IDE**
-2. Install library yang dibutuhkan:
+1. Open **Arduino IDE**
+2. Install the required libraries:
    - `WebSockets by Markus Sattler`
    - `ArduinoJson by Benoit Blanchon`
-   - `ESP32 Camera` (sudah include di board package esp32)
-3. Pilih board: `AI Thinker ESP32-CAM`
-4. Edit konfigurasi WiFi di `Esp32_CAM.ino`:
+   - `ESP32 Camera` (already included in the esp32 board package)
+3. Select board: `AI Thinker ESP32-CAM`
+4. Edit WiFi configuration in `Esp32_CAM.ino`:
    ```cpp
-   #define WIFI_SSID   "NamaWiFi_Anda"
-   #define WIFI_PASS   "PasswordWiFi_Anda"
+   #define WIFI_SSID   "YourWiFiName"
+   #define WIFI_PASS   "YourWiFiPassword"
    ```
-5. Upload sketch
-6. Buka Serial Monitor (115200 baud) → catat IP address yang muncul
+5. Upload the sketch
+6. Open Serial Monitor (115200 baud) → note the IP address displayed
 
 ---
 
-### 2. Install Dependensi Python
+### 2. Install Python Dependencies
 
 ```bash
 pip install ultralytics opencv-python websocket-client numpy
@@ -79,130 +79,147 @@ pip install ultralytics opencv-python websocket-client numpy
 
 ---
 
-### 3. Jalankan Stream (Tanpa Training Dulu)
+### 3. Run the Stream (Without Training First)
 
-Edit IP di `Python/main_yolo.py`:
+Edit the IP in `Python/main_yolo.py`:
 ```python
-CAM_IP = "192.168.x.xxx"   # Ganti dengan IP ESP32-CAM Anda
+CAM_IP = "192.168.x.xxx"   # Replace with your ESP32-CAM IP address
 ```
 
-Jalankan:
+Run:
 ```bash
 cd "Anti Drone Turret Systems/Python"
 python main_yolo.py
 ```
 
-> Program akan berjalan dalam **mode screenshot** — gunakan ini untuk mengumpulkan foto dataset drone.
+> The program will run in **screenshot mode** — use this to collect drone dataset photos.
 
-**Kontrol keyboard:**
+**Keyboard Controls:**
 
-| Tombol | Fungsi |
+| Key | Function |
 |---|---|
-| `S` | Screenshot manual (simpan ke `screenshots/manual/`) |
-| `A` | Toggle auto-capture (simpan otomatis tiap frame) |
-| `F` | Toggle senter ON/OFF |
-| `Q` | Keluar |
+| `S` | Manual screenshot (saved to `screenshots/manual/`) |
+| `A` | Toggle auto-capture (saves automatically every frame) |
+| `F` | Toggle flashlight ON/OFF |
+| `Q` | Quit |
 
 ---
 
-## 📸 Alur Pengumpulan Dataset & Training
+## 📸 Dataset Collection & Training Workflow
 
 ```
-[LANGKAH 1] Kumpulkan foto drone
-   └─ Jalankan main_yolo.py → tekan S atau A
-   └─ Pindahkan foto ke Datasheet/Drone aman/Drone1/ atau Drone berbahaya/Drone1/
+[STEP 1] Collect drone photos
+   └─ Run main_yolo.py → press S or A
+   └─ Move photos to Datasheet/Safe Drone/Drone1/ or Dangerous Drone/Drone1/
 
-[LANGKAH 2] Beri label bounding box
+[STEP 2] Add bounding box labels
    └─ python label_manual.py
-   └─ Pilih folder → klik+drag di atas drone → tekan ENTER
+   └─ Select folder → click+drag over drone → press ENTER
 
-[LANGKAH 3] Training model
+[STEP 3] Train the model
    └─ python train_yolo.py
-   └─ Tunggu hingga selesai (model tersimpan di drone_model/weights/best.pt)
+   └─ Wait until complete (model saved to drone_model/weights/best.pt)
 
-[LANGKAH 4] Deteksi real-time
+[STEP 4] Real-time detection
    └─ python main_yolo.py
-   └─ Model otomatis dimuat → drone terdeteksi dengan bounding box
+   └─ Model loads automatically → drone detected with bounding box
 ```
 
 ---
 
-## 🏷️ Cara Menggunakan label_manual.py
+## 🏷️ How to Use label_manual.py
 
 ```bash
 python label_manual.py
 ```
 
-1. Pilih nomor folder dari menu (atau `ALL` untuk semua sekaligus)
-2. Untuk tiap foto:
-   - **Klik + Drag** di atas objek drone → buat kotak bounding box
-   - Bisa buat **lebih dari 1 box** per gambar jika ada beberapa drone
-3. Kontrol:
+1. Select a folder number from the menu (or `ALL` to process all at once)
+2. For each photo:
+   - **Click + Drag** over the drone object → draw a bounding box
+   - You can draw **more than 1 box** per image if multiple drones are present
+3. Controls:
 
-| Tombol | Fungsi |
+| Key | Function |
 |---|---|
-| `ENTER` / `SPASI` | Simpan label & lanjut ke foto berikutnya |
-| `C` | Undo (hapus box terakhir) |
-| `R` | Reset semua box di foto ini |
-| `S` | Skip foto ini (tidak disimpan) |
-| `Q` | Keluar dari labeling |
+| `ENTER` / `SPACE` | Save label & move to next photo |
+| `C` | Undo (delete last box) |
+| `R` | Reset all boxes on this photo |
+| `S` | Skip this photo (not saved) |
+| `Q` | Quit labeling |
 
 ---
 
-## 🤖 Menambah Kelas Drone Baru
+## 🤖 Adding a New Drone Class
 
-### Di folder Datasheet:
+### In the Datasheet folder:
 ```
 Datasheet/
-  Drone aman/
-    DJI_Mini/       <- tambahkan sub-folder baru
+  Safe Drone/
+    DJI_Mini/       <- add new sub-folder
     DJI_Air/
-  Drone berbahaya/
+  Dangerous Drone/
     FPV_Racer/
     Custom_Drone/
 ```
 
-### Di `main_yolo.py`, tambahkan entri baru:
+### In `main_yolo.py`, add a new entry:
 ```python
 DRONE_INFO = {
-    "Drone_aman_DJI_Mini": {
-        "kategori": "AMAN",
-        "warna":    (0, 200, 0),
-        "aksi":     "Biarkan lewat",
+    "Safe_Drone_DJI_Mini": {
+        "category": "SAFE",
+        "color":    (0, 200, 0),
+        "action":   "Allow to pass",
     },
-    "Drone_berbahaya_FPV_Racer": {
-        "kategori": "BERBAHAYA",
-        "warna":    (0, 0, 255),
-        "aksi":     "AKTIFKAN TURRET",
+    "Dangerous_Drone_FPV_Racer": {
+        "category": "DANGEROUS",
+        "color":    (0, 0, 255),
+        "action":   "ACTIVATE TURRET",
     },
 }
 ```
-> Nama kelas otomatis dibentuk dari: `NamaKategori_NamaSubFolder` (spasi diganti `_`)
+> Class names are automatically formed from: `CategoryName_SubFolderName` (spaces replaced with `_`)
 
 ---
 
-## 📌 Tips Dataset
+## 📌 Dataset Tips
 
-| Kondisi | Rekomendasi |
+| Condition | Recommendation |
 |---|---|
-| Jumlah foto per kelas | Minimal **50–100** foto |
-| Variasi sudut | Foto dari depan, samping, atas, bawah |
-| Variasi jarak | Dekat (< 5m), sedang (5–20m), jauh (> 20m) |
-| Variasi cahaya | Siang, malam (dengan senter), mendung |
-| Background | Bervariasi (langit, pohon, gedung) |
+| Photos per class | Minimum **50–100** photos |
+| Angle variation | Photos from front, side, top, bottom |
+| Distance variation | Close (< 5m), medium (5–20m), far (> 20m) |
+| Lighting variation | Daytime, night (with flashlight), overcast |
+| Background | Varied (sky, trees, buildings) |
 
 ---
 
 ## 🔧 Troubleshooting
 
-| Masalah | Solusi |
+| Problem | Solution |
 |---|---|
-| `Connection refused` | Pastikan IP ESP32-CAM benar dan berada di jaringan WiFi yang sama |
-| `Kamera gagal init` | Coba upload ulang firmware, pastikan GPIO 4 tidak di-ground |
-| `Model tidak ditemukan` | Jalankan `train_yolo.py` dulu setelah punya dataset berlabel |
-| Frame lambat / lag | Kurangi resolusi di `Esp32_CAM.ino`: ganti `FRAMESIZE_QVGA` ke `FRAMESIZE_QQVGA` |
-| YOLO lambat | Pastikan `imgsz=320` di `main_yolo.py`, atau pakai `yolov8n.pt` (nano) |
+| `Connection refused` | Make sure the ESP32-CAM IP is correct and on the same WiFi network |
+| `Camera init failed` | Try re-uploading firmware, make sure GPIO 4 is not grounded |
+| `Model not found` | Run `train_yolo.py` first after you have a labeled dataset |
+| Slow frames / lag | Reduce resolution in `Esp32_CAM.ino`: change `FRAMESIZE_QVGA` to `FRAMESIZE_QQVGA` |
+| YOLO is slow | Make sure `imgsz=320` in `main_yolo.py`, or use `yolov8n.pt` (nano) |
 
 ---
 
-*Proyek: Anti Drone Turret Systems | Platform: ESP32-CAM + YOLOv8 + Python*
+## 📄Documentations
+
+<img width="472" height="326" alt="WhatsApp Image 2026-05-30 at 00 14 09" src="https://github.com/user-attachments/assets/9c7dac5c-608e-4473-86ca-36e3c7184809" />
+
+<img width="780" height="1052" alt="WhatsApp Image 2026-05-30 at 00 14 09 (1)" src="https://github.com/user-attachments/assets/a5b63d16-2c3f-4b71-8987-8b9189f3397b" />
+
+<img width="2250" height="1500" alt="BoxF1_curve" src="https://github.com/user-attachments/assets/b9285212-4073-446e-ac2d-306f0c7f1a65" />
+
+<img width="3000" height="2250" alt="confusion_matrix_normalized" src="https://github.com/user-attachments/assets/e14305c7-23a2-4752-ba5a-364b4b038777" />
+
+<img width="2400" height="1200" alt="results" src="https://github.com/user-attachments/assets/4977a5fa-59a1-4234-ac15-ffc0ff2d4e55" />
+
+<img width="1408" height="1024" alt="val_batch0_pred" src="https://github.com/user-attachments/assets/23806231-929d-4f32-848c-0143a5d4edd8" />
+
+
+---
+
+*Project: Anti Drone Turret Systems | Platform: ESP32-CAM + YOLOv8 + Python*
