@@ -5,8 +5,8 @@
 // =======================================================
 // KONFIGURASI WIFI
 // =======================================================
-const char *ssid = "Absolute Solver";
-const char *password = "CynIsMyRobo18z";
+const char *ssid = "YOUR_WIFI_NAME";
+const char *password = "YOUR_WIFI_PASSWORD";
 
 // =======================================================
 // KONFIGURASI PIN SERVO
@@ -28,6 +28,7 @@ int tiltAngle = 90;
 // Status Auto Tracking
 bool autoTrackingEnabled = false;
 
+//Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 // =======================================================
 // HALAMAN WEB UI (HTML + CSS + JS)
 // =======================================================
@@ -350,7 +351,7 @@ void handleSetServo() {
     server.send(400, "text/plain", "Bad Request");
   }
 }
-
+//Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 // =======================================================
 // SETUP AWAL
 // =======================================================
@@ -408,7 +409,7 @@ void setup() {
   server.on("/set", handleSetServo);
   server.on("/toggleTracking", handleToggleTracking);
   server.on("/track", handleTrack);
-
+//Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
   // Jalankan server
   server.begin();
   Serial.println("[SISTEM] Web Server IoT Turret siap digunakan!");
