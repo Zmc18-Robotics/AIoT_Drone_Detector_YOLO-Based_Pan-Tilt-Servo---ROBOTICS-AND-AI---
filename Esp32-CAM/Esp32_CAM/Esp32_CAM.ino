@@ -38,7 +38,7 @@ WiFiServer tcpServer(80);
 WebSocketsServer wsServer(81);
 
 bool flashOn = true; // default ON
-
+//Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 // ─── DEKLARASI FUNGSI ───────────────────────────────────
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload,
                     size_t length);
@@ -159,7 +159,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload,
   }
   if (type != WStype_TEXT)
     return;
-
+//Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
   // Parse JSON
   StaticJsonDocument<128> doc;
   DeserializationError error = deserializeJson(doc, payload);
