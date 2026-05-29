@@ -38,7 +38,7 @@ MODEL_BASE  = "yolov8n.pt"
 
 IMG_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 def scan_classes(datasheet_dir):
     """
     Scan folder Datasheet -> Kategori -> Sub-kelas -> gambar berlabel (.txt)
@@ -169,7 +169,7 @@ def main():
         print("Pastikan folder Datasheet ada di:")
         print(f"  {DATASHEET_DIR}")
         return
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
     total_labeled = sum(len(p) for p in valid_images.values())
     total_all     = 0
     for kelas_dir in classes_dict.values():
@@ -230,7 +230,7 @@ def main():
         print("\n  Sekarang jalankan: python main_yolo.py")
     else:
         print(f"  Selesai. Cek folder: {MODEL_OUT_DIR}/weights/")
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
     print("=" * 60)
 
 
