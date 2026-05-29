@@ -1,0 +1,9 @@
+path: c:\Users\Muhammad Zidane A\Documents\Arduino\AIoT\Anti Drone Turret Systems\Python\yolo_dataset
+train: train/images
+val: val/images
+nc: 4
+names:
+- Drone_aman_Drone1
+- Drone_aman_Drone2
+- Drone_berbahaya_Drone1
+- Drone_berbahaya_Drone2
