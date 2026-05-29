@@ -72,7 +72,7 @@ def mouse_callback(event, x, y, flags, param):
         disp_frame = draw_boxes(orig_frame.copy(), boxes, None)
         cv2.imshow(WINDOW, disp_frame)
 
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 # ════════════════════════════════════════════════════════════════════════════════
 #  Gambar semua bounding box di frame
 # ════════════════════════════════════════════════════════════════════════════════
@@ -201,7 +201,7 @@ def label_folder(folder_path, class_idx, skip_labeled=True):
         # Set judul window
         fname = os.path.basename(img_path)
         cv2.setWindowTitle(WINDOW, f"{WINDOW}  [{i+1}/{total}]  {fname}")
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
         disp_frame = draw_boxes(orig_frame.copy(), boxes, None)
         cv2.imshow(WINDOW, disp_frame)
 
@@ -318,7 +318,7 @@ def main():
         except ValueError:
             print("[ERROR] Pilihan tidak valid.")
             return
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
         display, folder, class_idx = classes[idx_choice]
         print(f"\n  Mulai label: {display}  (class_idx={class_idx})")
 
