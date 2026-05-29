@@ -139,7 +139,7 @@ def compute_and_send_tracking(frame, detections, frame_w, frame_h):
 
     if not tracking_enabled or not detections:
         return frame
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
     now = time.time()
     if now - last_track_time < TRACK_INTERVAL:
         return frame
