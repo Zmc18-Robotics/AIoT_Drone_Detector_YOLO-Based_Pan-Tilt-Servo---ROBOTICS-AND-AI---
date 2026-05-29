@@ -43,7 +43,7 @@ SCREENSHOT_DIR = os.path.join(BASE_DIR, "screenshots")
 MODEL_PATH     = os.path.join(BASE_DIR, "drone_model", "weights", "best.pt")
 
 os.makedirs(SCREENSHOT_DIR, exist_ok=True)
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 # ─── Threshold confidence ─────────────────────────────────────────────────────
 CONF_THRESHOLD = 0.50
 
@@ -192,7 +192,7 @@ def compute_and_send_tracking(frame, detections, frame_w, frame_h):
         servo_cmd_queue.append((int(round(current_pan)), int(round(current_tilt))))
     
     return frame
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 # ════════════════════════════════════════════════════════════════════════════════
 #  Load model YOLO
 # ════════════════════════════════════════════════════════════════════════════════
@@ -255,7 +255,7 @@ def receiver_thread(cam_sock):
             break
         frame_queue.append(jpeg_data)
 
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 # ════════════════════════════════════════════════════════════════════════════════
 #  Screenshot
 # ════════════════════════════════════════════════════════════════════════════════
@@ -342,7 +342,7 @@ def draw_detection_overlay(frame, detections, cls_name, cls_conf):
                 "aksi":     "-",
             })
             color = info["warna"]
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
             # Bounding box
             cv2.rectangle(frame, (x1, y1), (x2, y2), color, 3)
 
@@ -498,7 +498,7 @@ def main():
                 if yolo_model and (now - last_yolo_time) >= YOLO_INTERVAL:
                     last_detections, last_cls_name, last_cls_conf = run_yolo_inference(yolo_model, frame)
                     last_yolo_time = now
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
                 # ── Hitung tracking dan kirim servo ───────────────────────
                 frame = compute_and_send_tracking(frame, last_detections, w, h)
 
