@@ -207,7 +207,7 @@ DRONE_INFO = {
 
 ## 📄Documentations
 
-<img width="472" height="326" alt="WhatsApp Image 2026-05-30 at 00 14 09" src="https://github.com/user-attachments/assets/9c7dac5c-608e-4473-86ca-36e3c7184809" />
+<img width="480" height="321" alt="image" src="https://github.com/user-attachments/assets/f41fa26c-0894-4fd6-b0cf-218d23ef78e0" />
 
 <img width="780" height="1052" alt="WhatsApp Image 2026-05-30 at 00 14 09 (1)" src="https://github.com/user-attachments/assets/a5b63d16-2c3f-4b71-8987-8b9189f3397b" />
 
