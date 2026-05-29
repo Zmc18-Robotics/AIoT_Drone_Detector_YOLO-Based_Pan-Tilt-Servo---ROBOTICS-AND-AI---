@@ -102,7 +102,7 @@ def draw_boxes(frame, boxes_list, live_box=None):
 
     return frame
 
-
+# Made by Zmc18-Robotics ~ @mc.zminecrafter_18 ~ Zmc18_Roboticz
 # ════════════════════════════════════════════════════════════════════════════════
 #  Simpan label ke .txt (format YOLO normalized)
 # ════════════════════════════════════════════════════════════════════════════════
