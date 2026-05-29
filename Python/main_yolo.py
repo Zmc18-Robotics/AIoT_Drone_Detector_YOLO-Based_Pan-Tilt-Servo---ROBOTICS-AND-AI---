@@ -29,11 +29,11 @@ from collections import deque
 from datetime import datetime
 
 # ─── Konfigurasi IP ──────────────────────────────────────────────────────────
-CAM_IP       = "192.168.8.198"   # <<< Ganti dengan IP ESP32-CAM Anda
+CAM_IP       = "XXX.XXX.XXX.XXX"   # <<< Ganti dengan IP ESP32-CAM Anda
 CAM_TCP_PORT = 80
 CAM_WS_PORT  = 81
 
-SERVO_IP     = "192.168.8.120"   # <<< IP ESP32 Servo (Pan-Tilt)
+SERVO_IP     = "XXX.XXX.XXX.XXX"   # <<< IP ESP32 Servo (Pan-Tilt)
 
 # ─── Path ─────────────────────────────────────────────────────────────────────
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
